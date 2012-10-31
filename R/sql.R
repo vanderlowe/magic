@@ -1,5 +1,4 @@
-sql <- function(database = NULL, query = NULL, dsn = "azure", driver = "MySQL") {
-  # This function assumes that you have set a dsn named 'azure' and installed ODBC drivers for MySQL
+sql <- function(database = NULL, query = NULL, dsn = "azure") {
   
   lib <- require("RODBC")
   if (!lib) {stop("You must have package 'RODBC' installed.")}
@@ -7,11 +6,9 @@ sql <- function(database = NULL, query = NULL, dsn = "azure", driver = "MySQL") 
 	if (is.null(database)) {stop("You must specify which database you want to use.")}
 	if (is.null(query)) {stop("You must specify an SQL query")}
 
-	# Create connection string
-	connection.string = sprintf("driver={%s};dsn={%s};database={%s}", driver, dsn, database)
-
 	# Create database connection
-	db <- odbcDriverConnect(connection.string)
+	db <- odbcConnect(dsn)
+	sqlQuery(db, sprintf("USE %s;", database))
 
 	# Execute query
 	result <- sqlQuery(db, query)
