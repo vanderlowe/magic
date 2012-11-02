@@ -23,7 +23,13 @@
   \item{query}{A text string that can be evaluated as a valid SQL statement. By default, a command to show available databases.}
   \item{dsn}{A text string that matches a Data Source Name on the local system.}
 }
-\examples{sql()  # Returns available databases.
-sql("iOpener", "SHOW TABLES;")  # Show available tables in iOpener database.
-sql("MyPersonality", "SELECT gender, age FROM user_dict")  # Select gender and age from user dictionary
+\examples{
+# Returns available databases.
+sql()
+
+# Show available tables in iOpener database.
+sql("iOpener", "SHOW TABLES;")
+
+# Select gender and age from user dictionary from MyPersonality database
+sql("MyPersonality", "SELECT gender, age FROM user_dict")
 }
