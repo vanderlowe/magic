@@ -1,0 +1,2 @@
+export(magicExplain)
+export(magicSQL)

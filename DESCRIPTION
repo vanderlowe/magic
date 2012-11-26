@@ -5,4 +5,10 @@ Version: 0.0.1
 License: GPL-3
 Title: magic
 Description: This package makes your analytical abilities magical
-Suggests: RODBC, data.table, ggplot2
+Suggests:
+    RODBC,
+    data.table,
+    ggplot2
+Collate:
+    'magicExplain.R'
+    'magicSQL.R'
