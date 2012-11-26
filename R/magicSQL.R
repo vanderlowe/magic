@@ -45,7 +45,12 @@ magicSQL <- function(query = NULL, db = NULL) {
     require(RODBC)
     
     channel <- odbcConnect("UnifiedServer")
-    sqlQuery(channel, sprintf("USE %s;", db))
+    
+    # Check whether db was defined; if yes, use the given database
+    if (!is.null(db)) {
+      sqlQuery(channel, sprintf("USE %s;", db))
+    }
+    
     results <- sqlQuery(channel, query)
     
     # Remove system databases from null query results
