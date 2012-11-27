@@ -63,3 +63,4 @@ magicSQL <- function(query = NULL, db = NULL) {
   }
   
 }
+
