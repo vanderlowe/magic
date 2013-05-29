@@ -2,11 +2,12 @@
 #'
 #' This function explains a lot of things.
 #'
-#' @keywords manip
 #' @export
 #' @examples
+#' \dontrun{
 #' magicExplain()
 #' magicExplain("s002")
+#' }
 
 magicExplain <- function(obj, alpha = 0.05) {
   UseMethod("magicExplain")
