@@ -8,8 +8,9 @@
   This function explains a lot of things.
 }
 \examples{
+\dontrun{
 magicExplain()
 magicExplain("s002")
 }
-\keyword{manip}
+}
 
