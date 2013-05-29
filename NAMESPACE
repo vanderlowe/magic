@@ -1,2 +1,8 @@
+export(APA.decimal)
+export(getCountryName)
+export(getISOs)
+export(iso2)
+export(iso3)
 export(magicExplain)
+export(magicFindVariable)
 export(magicSQL)

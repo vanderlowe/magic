@@ -1,14 +1,19 @@
 Package: magic
 Maintainer: Ilmo van der Löwe <iv244@cam.ac.uk>
 Author: Ilmo van der Lowe
-Version: 0.0.1
+Version: 0.1
 License: GPL-3
 Title: magic
-Description: This package makes your analytical abilities magical
+Description: This package gives you magical analytical abilities
 Suggests:
     RODBC,
     data.table,
-    ggplot2
+    ggplot2,
+    RMySQL
 Collate:
     'magicExplain.R'
     'magicSQL.R'
+    'APA.decimal.R'
+    'ISO_codes.R'
+    'magicFindVariable.R'
+    'magicP.R'
