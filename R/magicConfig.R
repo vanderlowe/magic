@@ -40,7 +40,7 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
     config.data <- c("message('Loading magic settings...')",
                      "Sys.setenv(magic_host = 'alex.e-psychometrics.com')",
                      sprintf("Sys.setenv(magic_user = '%s')", Sys.getenv("magic_user")),
-                     sprintf("Sys.setenv(magic_password = '%s')", Sys.getenv("magic_password")))
+                     sprintf("Sys.setenv(magic_password = '%s')", Sys.getenv("magic_password")), "")
     
     # Check if profile file exists
     profile.file <- paste(Sys.getenv("R_HOME"), "/etc/Rprofile.site", sep = "")
