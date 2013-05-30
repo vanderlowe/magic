@@ -1,9 +1,10 @@
 Package: magic
 Maintainer: Ilmo van der Löwe <iv244@cam.ac.uk>
 Author: Ilmo van der Lowe
-Version: 0.1
+Version: 0.2
 License: GPL-3
 Title: magic
+Date: 2013-05-30
 Description: This package gives you magical analytical abilities
 Suggests:
     RODBC,
