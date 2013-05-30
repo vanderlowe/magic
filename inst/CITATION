@@ -13,6 +13,6 @@ bibentry("Manual",
          mheader = "To cite magic in publications use:",
          
          mfooter = 
-           paste("I have invested a lot of time and effort in creating magic,",
+           paste("I have invested a lot of time and effort in creating magic for your convenience,",
                  "please cite it when using it for data analysis.", sep = " ")
 )
