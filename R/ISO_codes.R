@@ -25,9 +25,9 @@ iso2  <- function(country) {
     stop("You must supply either a country name or numeric ISO code")
   }
   country <- as.character(country)
-  if (nchar(country) ==  2) {return(verifyISO2(country))}
-  if (nchar(country) ==  3) {return(getISO2byISO3(country))}
-  if (nchar(country) >  3) {return(getISO2byName(country))}
+  if (nchar(country) ==  2) {return(magic:::verifyISO2(country))}
+  if (nchar(country) ==  3) {return(magic:::getISO2byISO3(country))}
+  if (nchar(country) >  3) {return(magic:::getISO2byName(country))}
   stop("You must provide a valid 2- or 3-letter ISO country code or a recognized country name.")
 }
 
@@ -45,13 +45,13 @@ verifyISO2 <- function(code) {
 
 getISO2byName <- function(country) {
   return(
-    verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE name = '%s'", country), "cpw_meta")[,1]))
+    magic:::verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE name = '%s'", country), "cpw_meta")[,1]))
   )
 }
 
 getISO2byISO3 <- function(iso3) {
   return(
-    verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1]))
+    magic:::verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1]))
   )
 }
 
@@ -67,9 +67,9 @@ iso3  <- function(country) {
     stop("You must supply either a country name or numeric ISO code")
   }
   country <- as.character(country)
-  if (nchar(country) ==  2) {return(getISO3byISO2(country))}
-  if (nchar(country) ==  3) {return(verifyISO3(country))}
-  if (nchar(country) >  3) {return(getISO3byName(country))}
+  if (nchar(country) ==  2) {return(magic:::getISO3byISO2(country))}
+  if (nchar(country) ==  3) {return(magic:::verifyISO3(country))}
+  if (nchar(country) >  3) {return(magic:::getISO3byName(country))}
   stop("You must provide a valid 2- or 3-letter ISO country code or a recognized country name.")
 }
 
