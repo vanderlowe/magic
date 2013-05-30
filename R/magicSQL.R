@@ -18,16 +18,16 @@ magicSQL <- function(query = NULL, db = NULL) {
   }
   if (is.null(query)) {query = "SHOW DATABASES;"}
   
-  # Load connection details from environment variables
-  magic_host <- Sys.getenv("magic_host")
-  magic_user <- Sys.getenv("magic_user")
-  magic_password <- Sys.getenv("magic_password")
-  
   # Check whether magicConfig needs to be run
   if (any(Sys.getenv("magic_host") == "", Sys.getenv("magic_user") == "", Sys.getenv("magic_password") == "")) {
     message("Your access credentials have not yet been set...")
     magicConfig()
   }
+  
+  # Load connection details from environment variables
+  magic_host <- Sys.getenv("magic_host")
+  magic_user <- Sys.getenv("magic_user")
+  magic_password <- Sys.getenv("magic_password")
   
   # Check whether the user is on a Windows or Mac system
   # This is needed, because Mac users will connect via RMySQL
