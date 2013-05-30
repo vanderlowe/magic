@@ -9,31 +9,34 @@
 magicMap <- function(x, data.column = NULL) {
   if (is.null(data.column)) {stop("You must name the column containing the numeric data to plot.")}
   
-  country.key <- guessISO(x)
+  country.key <- magic:::guessISO(x)
   if (is.null(country.key)) {stop("I could not guess the column for country codes. Please make sure you have a column named 'country' or 'isoalpha2' in your data.")}
   
   if (country.key$type == "country") {
-    x <- mergeISO(x, country.names = country.key$column)
+    x <- magic:::mergeISO(x, country.names = country.key$column)
     country.key$column <- "ISOalpha3"
     country.key$type <- "ISO3"
   }
   
-  country.data <- joinCountryData2Map(x, joinCode = country.key$type, nameJoinColumn=country.key$column)
-  mapCountryData(country.data, nameColumnToPlot = data.column)
+  country.data <- rworldmap::joinCountryData2Map(x, joinCode = country.key$type, nameJoinColumn=country.key$column)
+  rworldmap::mapCountryData(country.data, nameColumnToPlot = data.column)
 }
 
 locateCountryCols <- function(x) {
+  # Match column names to a list of probable names
   cols <- tolower(names(x))
   regex <- c("(name|country|countries|country(.|)code|iso(.|)alpha(.|)(2|3)|iso(.|)(2|3))")
-  hits <- cols[str_detect(cols, regex)]
+  hits <- cols[stringr::str_detect(cols, regex)]
   
-  if (identical(hits, character(0))) {return(NULL)} # No hits
+  if (identical(hits, character(0))) {return(NULL)} # Return NULL for no hits
   hits <- names(x)[which(tolower(names(x)) == hits)]
   return(hits)
 }
 
 getCountryColWidths <- function(x) {
-  hits <- locateCountryCols(x)
+  # Determine if data in a prospective country id column is ISO2, ISO3, or country names
+  # by measuring the maximum character length of the column
+  hits <- magic:::locateCountryCols(x)
   if (is.null(hits)) {stop("Could not guess country names.")}
   candidates <- data.frame(col = hits, chars = NA_integer_, stringsAsFactors = F)
   for (i in 1:nrow(candidates)) {
@@ -54,7 +57,8 @@ getCountryColWidths <- function(x) {
 }
 
 guessISO <- function(x) {
-  poss.cols <- subset(getCountryColWidths(x), chars == max(chars))
+  # Return a list of the most likely country ID column and best guess at content type (ISO2, ISO3, or country name)
+  poss.cols <- subset(magic:::getCountryColWidths(x), chars == max(chars))
   o <- list(column = poss.cols$col)
   if (poss.cols$chars == 0) {
     o$type <- "country"
@@ -69,6 +73,8 @@ guessISO <- function(x) {
 }
 
 mergeISO <- function(x, country.names = NULL) {
+  # Merge ISO data based on spelled-out country name.
+  # Probably very brittle, as even a single character difference will break the results.
   isos <- magicSQL("SELECT name, ISOalpha2, ISOalpha3 FROM countries", "cpw_meta")
   x <- merge(x, isos, by.x = country.names, by.y = "name")
   return(x)
