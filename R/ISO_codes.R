@@ -1,13 +1,14 @@
-#' Country data
+#' All country data
 #' 
-#' Convenience function to retrieve country data from \code{cpw_meta.countries} table.
+#' Convenience function to retrieve the entire \code{cpw_meta.countries} table.
 #' @return Data frame of country data
 #' @export
-#' 
-countries <- function() {
-  world <- magicSQL("SELECT * FROM countries", "cpw_meta")
-  world$name <- iconv(x = world$name, from = "latin1", to = "UTF-8")
-  return(world)
+#' @note This function also converts country and capital names to UTF-8.
+world <- function() {
+  w <- magicSQL("SELECT * FROM countries", "cpw_meta")
+  w$name <- iconv(as.character(w$name), from = "latin1", to = "UTF-8")
+  w$capital <- iconv(as.character(w$capital), from = "latin1", to = "UTF-8")
+  return(w)
 }
 
 #' Get a list of all ISO 3166-1 alpha codes
