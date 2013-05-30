@@ -6,7 +6,7 @@
 #' @import rworldmap stringr
 #' @export
 
-magicMap <- function(x, data.column = NULL) {
+magicMap <- function(x, data.column = NULL, ...) {
   if (is.null(data.column)) {stop("You must name the column containing the numeric data to plot.")}
   
   country.key <- magic:::guessISO(x)
@@ -19,7 +19,7 @@ magicMap <- function(x, data.column = NULL) {
   }
   
   country.data <- rworldmap::joinCountryData2Map(x, joinCode = country.key$type, nameJoinColumn=country.key$column)
-  rworldmap::mapCountryData(country.data, nameColumnToPlot = data.column)
+  rworldmap::mapCountryData(country.data, nameColumnToPlot = data.column, ...)
 }
 
 locateCountryCols <- function(x) {
