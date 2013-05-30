@@ -11,10 +11,14 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
   
   if (interactive()) {
     # R is running in interactive mode.
+    # First, set host
+    Sys.setenv(magic_host = 'alex.e-psychometrics.com')
+        
     # If user name is provided as an argument, use it.
     if (!is.null(user)) {
       Sys.setenv("magic_user" = user)
     } else {
+      # If not, ask for it.
       uid <- readline("Please enter your user name: ")
       Sys.setenv("magic_user" = uid)
     }
@@ -22,6 +26,7 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
     if (!is.null(password)) {
       Sys.setenv("magic_password" = password)
     } else {
+      # If not, ask for it.
       pwd <- readline("Please enter your password: ")
       Sys.setenv("magic_password" = pwd)
     }
