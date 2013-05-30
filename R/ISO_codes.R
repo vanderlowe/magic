@@ -1,3 +1,13 @@
+#' Country data
+#' 
+#' Convenience function to retrieve country data from \code{cpw_meta.countries} table.
+#' @return Data frame of country data
+#' @export
+#' 
+countries <- function() {
+  return(magicSQL("SELECT * FROM countries", "cpw_meta"))
+}
+
 #' Get a list of all ISO 3166-1 alpha codes
 #' 
 #' Retrieve either ISO 3166-1 alpha-2 or alpha-3 codes from \code{cpw_meta.countries} table
