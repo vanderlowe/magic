@@ -5,7 +5,9 @@
 #' @export
 #' 
 countries <- function() {
-  return(magicSQL("SELECT * FROM countries", "cpw_meta"))
+  world <- magicSQL("SELECT * FROM countries", "cpw_meta")
+  world$name <- iconv(x = world$name, from = "latin1", to = "UTF-8")
+  return(world)
 }
 
 #' Get a list of all ISO 3166-1 alpha codes
