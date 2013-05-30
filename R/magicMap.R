@@ -23,13 +23,11 @@ magicMap <- function(x, data.column = NULL) {
 }
 
 locateCountryCols <- function(x) {
+  cols <- names(x)
   # Match column names to a list of probable names
-  cols <- tolower(names(x))
-  regex <- c("(name|country|countries|country(.|)code|iso(.|)alpha(.|)(2|3)|iso(.|)(2|3))")
+  regex <- c("((N|n)ame|(C|c)ountry|(C|c)ountries|(C|c)ountry(.|)(C|c)ode|(iso|ISO)(.|)(A|a)lpha(.|)(2|3)|(iso|ISO)(.|)(2|3))")
   hits <- cols[stringr::str_detect(cols, regex)]
-  
   if (identical(hits, character(0))) {return(NULL)} # Return NULL for no hits
-  hits <- names(x)[which(tolower(names(x)) == hits)]
   return(hits)
 }
 
