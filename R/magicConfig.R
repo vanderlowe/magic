@@ -45,7 +45,7 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
     # Check if profile file exists
     profile.file <- paste(Sys.getenv("R_HOME"), "/etc/Rprofile.site", sep = "")
     if (file.exists(profile.file)) {
-      message("Rprofile.site file exists already")
+      message("Rprofile.site file exists already; appending.")
     } else {
       file.create(profile.file)
     }
