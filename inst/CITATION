@@ -1,10 +1,6 @@
-family.name <- "van der Löwe"
-Encoding(family.name) <- "UTF-8"
-
 bibentry("Manual",
          title = "magic",
-         author = person(given = c("Ilmo", "Konstantin"), 
-                         family = family.name),
+         author = personList(person(given = c("Ilmo", "Konstantin"), family = 'van der Löwe')),
          organization = "Cambridge Prosociality and Well-being Lab, University of Cambridge",
          address      = "Cambridge, United Kingdom",
          year   = 2013,
