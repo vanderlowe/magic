@@ -1,3 +1,4 @@
+<img src = "http://i.imgur.com/XD2QLHf.jpg" alt="magic airplane" style="width: 500px;"/>
 In 1962, Arthur C. Clarke wrote:
 > Any sufficiently advanced technology is indistinguishable from magic.
 
