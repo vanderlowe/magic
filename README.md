@@ -18,7 +18,7 @@ The easiest way to get some `magic` on your computer, please type the following 
 ```
 This should get you rolling. These tools are under development, so try re-installing if you are not feeling the `magic`.
 
-# using `magic`
+# using `magic` to access data
 
 Most of your R scripts that use the lab data should start with:
 
@@ -99,4 +99,23 @@ Below is a more complex example script to work with the myPersonality data.
     
     # What does plotting the location data reveal?
     plot(nature$location_lon, nature$location_lat)
+```    
+# using `magic` to make your life easier
+There are a number of helpful `magic` functions at your disposal, especially for working with country-level data.
+```
+    # Get ISO 3166-1 country codes
+    iso2("Zambia")
+    iso3("Zambia")
     
+    # Get a list of country data
+    countries()
+    
+    # Plot quick maps
+    magicMap(countries, "capital_longitude")
+```
+
+# citing `magic`
+If you use `magic` in your work, make sure to cite it:
+```
+    citation("magic")
+```
