@@ -18,7 +18,7 @@ magicMap <- function(x, data.column = NULL, ...) {
     country.key$type <- "ISO3"
   }
   
-  country.data <- rworldmap::joinCountryData2Map(x, joinCode = country.key$type, nameJoinColumn=country.key$column)
+  country.data <- rworldmap::joinCountryData2Map(x, joinCode = country.key$type, nameJoinColumn=country.key$column, verbose = TRUE)
   rworldmap::mapCountryData(country.data, nameColumnToPlot = data.column, ...)
 }
 

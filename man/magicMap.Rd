@@ -2,7 +2,7 @@
 \alias{magicMap}
 \title{Plot data on a world map}
 \usage{
-  magicMap(x, data.column = NULL)
+  magicMap(x, data.column = NULL, ...)
 }
 \arguments{
   \item{x}{A data frame of data with at least one column of
