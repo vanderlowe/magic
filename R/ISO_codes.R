@@ -4,7 +4,7 @@
 #' @return Data frame of country data
 #' @export
 #' @note This function also converts country and capital names to UTF-8.
-world <- function() {
+countries <- function() {
   w <- magicSQL("SELECT * FROM countries", "cpw_meta")
   w$name <- iconv(as.character(w$name), from = "latin1", to = "UTF-8")
   w$capital <- iconv(as.character(w$capital), from = "latin1", to = "UTF-8")
