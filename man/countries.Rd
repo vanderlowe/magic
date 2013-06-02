@@ -1,6 +1,6 @@
 \name{countries}
 \alias{countries}
-\title{Country data}
+\title{All country data}
 \usage{
   countries()
 }
@@ -8,7 +8,11 @@
   Data frame of country data
 }
 \description{
-  Convenience function to retrieve country data from
+  Convenience function to retrieve the entire
   \code{cpw_meta.countries} table.
+}
+\note{
+  This function also converts country and capital names to
+  UTF-8.
 }
 
