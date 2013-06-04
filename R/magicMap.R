@@ -3,10 +3,16 @@
 #' This is a simple wrapper function to \code{rworldmap} for easy plotting of global data.
 #' @param x A data frame of data with at least one column of country identificator (i.e., names or ISO alpha codes) and one column of numerical data to visualise.
 #' @param data.column The numeric column you wish to visualize.
-#' @import rworldmap stringr
+#' @import stringr
 #' @export
 
 magicMap <- function(x, data.column = NULL, ...) {
+  if (require(rworldmap)) {  # Rather than loading rworldmap every time when magic is loaded, it is triggered only by magicMap function
+    # User already has installed 'rworldmap'
+  } else {
+    install.packages("rworldmap")
+    require(rworldmap)
+  }
   if (is.null(data.column)) {stop("You must name the column containing the numeric data to plot.")}
   
   country.key <- magic:::guessISO(x)
