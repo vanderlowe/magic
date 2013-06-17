@@ -16,7 +16,23 @@ The easiest way to get some `magic` on your computer, please type the following 
     install_github("magic", "vanderlowe")
     require("magic")
 ```
-This should get you rolling. These tools are under development, so try re-installing if you are not feeling the `magic`.
+
+## Installing ODBC-drivers (Windows only)
+Please go to http://dev.mysql.com/downloads/connector/odbc/#downloads and download the driver for Windows platform (depending on the version of Windows you have). For any computer that is less than two years old, you probably should install the x64-bit version.
+
+### Configuring ODBC (Windows only)
+
+1. Click start and type `ODBC`. 
+2. Something called Data Source (ODBC) should appear. Click on this. 
+3. Now click the `System DSN` tab. 
+4. Select `Add...` in this tab.
+5. Choose `MySQL ODBC 5.2w Driver`
+6. Fill in the following values on the new screen:
+7. In the "Data Source Name:" field, type: `UnifiedServer` (Leave the description field blank.)
+8. For the "TCP/IP Server field:", enter: `alex.e-psychometrics.com` (Leave the "Port:" as 3306)
+9. For the "User:" Field, enter your Hermes user name. Your Hermes user name is the beginning of your Cambridge email address, such as `ak823`. 
+10. For the value of "Password", enter the password you received from Ilmo. (Leave the "Database:" field blank.)
+11. Click OK!
 
 # using `magic` to access data
 
