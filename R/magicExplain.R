@@ -1,6 +1,6 @@
 #' Explanations by \code{magic}
 #'
-#' This function explains a lot of things.
+#' This function explains a lot of things. In other words, it is a generic despatch method that routes objects to the right method based on class.
 #'
 #' @export
 #' @examples
@@ -8,19 +8,30 @@
 #' magicExplain()
 #' magicExplain("s002")
 #' }
-
 magicExplain <- function(obj, alpha = 0.05) {
   UseMethod("magicExplain")
 }
 
+#' Print helper function
+#' 
+#' Print objects of class "magic".
+#' @export
 print.magic <- function(x) {
   print(x$magicExplain)
 }
 
+#' Explains NULL
+#' 
+#' Provide instructions when \code{magicExplain} is given a NULL object.
+#' @export
 magicExplain.NULL <- function() {
   message('Try giving magicExplain() a variable name within quotes as an argument (e.g., magicExplain("s002").')
 }
 
+#' Explains a character string
+#' 
+#' Provide instructions when \code{magicExplain} is given a character object (taken to mean a variable in \code{cpw_meta}).
+#' @export
 magicExplain.character <- function(variable.name = NULL, database = NULL) {
   
   # Check whether user gave the necessary information 
@@ -46,6 +57,10 @@ magicExplain.character <- function(variable.name = NULL, database = NULL) {
   return(variables)
 }
 
+#' Print helper function
+#' 
+#' This function prints information about \code{magicMetaVariables.}
+#' @export
 print.magicMetaVariables <- function(x) {
   # Print detailed explanation for perfect hits (i.e., only one result)
   if (nrow(x) == 1) {
