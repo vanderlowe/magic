@@ -2,7 +2,7 @@
 #' 
 #' This function queries the \code{cpw_litReview} to visualize a citation network between the papers in the database.
 #' @export
-#' @import magic igraph
+#' @import igraph
 #' @param user Optional vector of user names to filter citations based on who contributed them into the database.
 magicOverview <- function(user = NULL, prune = 1) {
   g <- magicCitationNetwork(user = user, prune = prune)

@@ -4,7 +4,7 @@
 #' @param citekey A unique identifier for the article in the format 'firstauthorfamilyname' + year (e.g., vanderlowe2013).
 #' @param title Full title of the article (optional, but strongly recommended!)
 #' @return TRUE on successful insertion
-#' @import magic stringr
+#' @import stringr
 #' @export
 #' 
 magicPaper <- function(citekey, title, update = FALSE) {
