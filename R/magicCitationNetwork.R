@@ -10,7 +10,10 @@ magicCitationNetwork <- function(user = NULL, prune = 0) {
     users <- unique(c(users.cit, users.pap))
   }
   
+  # Citations are edges in the network
   citations <- magicSQL(sprintf("SELECT `from`, `to`, `section` FROM citations WHERE user IN ('%s')", paste(users, collapse = "','")), "cpw_litReview")
+  
+  # Papers are the network vertices
   papers <- magicSQL("SELECT `citekey`, COUNT(`to`) as degree
                       FROM   papers p 
                       LEFT JOIN citations c
@@ -21,11 +24,11 @@ magicCitationNetwork <- function(user = NULL, prune = 0) {
                      )
   
   prune.papers <- c(
-    subset(papers, degree <= prune)$citekey
+    subset(papers, degree > prune)$citekey
   )
   
-  papers <- subset(papers, degree <= prune)
-  citations <- subset(citations, from %in% prune.papers | to %in% prune.papers)
+  papers <- subset(papers, degree > prune)
+  citations <- subset(citations, from %in% prune.papers & to %in% prune.papers)
   
   g <- igraph::graph.data.frame(citations, directed = T, vertices = papers)
   return(g)
