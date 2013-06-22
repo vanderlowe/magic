@@ -2,7 +2,7 @@
 #' 
 #' This function returns an \code{igraph} network object.
 #' @export
-#' @import magic igraph
+#' @import igraph
 magicCitationNetwork <- function(user = NULL, prune = 0) {
   if (is.null(user)) {
     users.cit <- magicSQL("SELECT DISTINCT(user) FROM citations", "cpw_litReview")$user
