@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Putting <code>magic</code> into your literature review</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Putting <code>magic</code> into your literature review</h1>
+
+<p>Let us assume that you are interested in quickly getting a sense of which papers are important in a particular field of study. In practical terms, you have a couple of papers that you found via Google Scholar, and now you want to know which other papers you should also read.</p>
+
+<p>For demonstration purposes, let&#39;s say that you wish to study basic emotions and emotion coherence. Someone recommended that you read Paul Ekman&#39;s chapter on basic emotions (1999) and you found an interesting paper on emotion coherence by Iris Mauss and her colleagues (2005) on Google Scholar.</p>
+
+<p>The <code>magic</code> package helps you to systematically harvest citations from these papers to get an overview of related research and can guide your literature review by highlighting other papers that you probably should also read.</p>
+
+<h1>Creating entries in the literature review database</h1>
+
+<p>At the moment, <code>magic</code> requires a high level of instruction from the user (although part of this can be automated in the future). The first step is to let <code>magic</code> know which paper you are currently reading. To accomplish this, we will use <code>magicPaper</code> function.</p>
+
+<h2>Creating a new paper with <code>magicPaper</code></h2>
+
+<p>The only required argument for <code>magicPaper</code> is a <strong>citation key</strong> (or citekey for short). Each paper must be uniquely identified, so that we know which papers cite which other papers. The citekey will be in the format of first author&#39;s family name and publication year, similar to the APA style in-text citations. Since our first paper to be read is by Ekman, the citekey will be <code>ekman1999</code>. Notice that there are no spaces, hyphenation is removed, and special characters are replaced with their basic equivalents (i.e., ö = o).</p>
+
+<p>Thus, to create a new paper in the literature review database, you can simply type:</p>
+
+<pre><code>magicPaper(&quot;ekman1999&quot;)
+</code></pre>
+
+<p>However, it would also be nice to include the paper title in the database entry, wouldn&#39;t it? This can be done by typing:</p>
+
+<pre><code>magicPaper(&quot;ekman1999&quot;, &quot;Basic Emotions&quot;, update = TRUE)
+</code></pre>
+
+<p>The <code>update = TRUE</code> argument indicates that you are not creating a new paper, just updating an existing one.</p>
+
+<p>Since we will be needing the citekey <code>ekman1999</code> a lot while creating citations originating from his paper, let&#39;s store it for easy use:</p>
+
+<pre><code>myPDF &lt;- &quot;ekman1999&quot;
+</code></pre>
+
+<p>This allows us to use <code>myPDF</code> instead of having to type <code>ekman1999</code> every time we wish to make a citation.</p>
+
+<h2>Creating citations with <code>magicCite</code></h2>
+
+<p>Now that the paper by Ekman is in our database and the citekey handily available, we can start reading the paper itself. Currently, there are no automated parsing functions in <code>magic</code> (yet) to identify the citations for you, so you need to read the paper carefully, sentence by sentence (as a diligent academic should anyway). As you read the PDF, whenever you encounter a sentence that cites another paper, copy it to clipboard. The first sentence in Ekman&#39;s paper has a self-citation:
+<em>&ldquo;In this chapter I consolidate my previous writings about basic emotions (Ekman, 1984,1992a, 1992b) and introduce a few changes in my thinking.&rdquo;</em> Let&#39;s copy it to clipboard, then!</p>
+
+<p>Since this sentence actually makes three citations, we need to use the <code>magicCite</code> function three times, like this:</p>
+
+<pre><code>magicCite(from = myPDF, 
+          to &lt;- &quot;Ekman1984&quot;,
+          sentence &lt;- &quot;In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.&quot;,
+          section &lt;- &quot;i&quot;
+)
+
+magicCite(from = myPDF, 
+          to &lt;- &quot;Ekman1992a&quot;,
+          sentence &lt;- &quot;In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.&quot;,
+          section &lt;- &quot;i&quot;
+)
+
+magicCite(from = myPDF, 
+          to &lt;- &quot;Ekman1992b&quot;,
+          sentence &lt;- &quot;In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.&quot;,
+          section &lt;- &quot;i&quot;
+)
+</code></pre>
+
+<p>The <code>from</code> argument indicates the source document making the citation (<code>ekman1999</code> in our case, stored in the <code>myPDF</code> variable). The <code>to</code> argument is the target of the citation, <code>sentence</code> is the textual context in which the citation occurs, and the <code>section</code> indicates whether the citation occurs in the <strong>i</strong>ntroduction, <strong>m</strong>ethod, <strong>r</strong>esults, or <strong>d</strong>iscussion (as indicated by the first letter of the section heading).</p>
+
+<p>Thus, reading the entire paper, your script would include a long list of <code>magicCite</code> functions (<a href="">an example for <code>ekman1999</code></a>)</p>
+
+</body>
+
+</html>
+
