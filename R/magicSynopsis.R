@@ -2,7 +2,7 @@
 #' 
 #' This function prints sentences that authors have used in reference to the focal paper. In many ways, these sentences summarize important points about it.
 #' @export
-#' @import magic tm stringr
+#' @import magic stringr
 #' @param citekey The citation key of the paper to be summarized.
 #' @return A vector of sentences
 magicSynopsis <- function(citekey) {
