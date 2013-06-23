@@ -3,7 +3,7 @@
 #' This function returns an \code{igraph} network object.
 #' @export
 #' @import igraph
-magicCitationNetwork <- function(user = NULL, prune = 0) {
+magicCitationNetwork <- function(user = NULL) {
   if (is.null(user)) {
     users.cit <- magicSQL("SELECT DISTINCT(user) FROM citations", "cpw_litReview")$user
     users.pap <- magicSQL("SELECT DISTINCT(user) FROM papers", "cpw_litReview")$user
@@ -22,13 +22,6 @@ magicCitationNetwork <- function(user = NULL, prune = 0) {
                       ORDER BY degree DESC", 
                      "cpw_litReview"
                      )
-  
-  prune.papers <- c(
-    subset(papers, degree > prune)$citekey
-  )
-  
-  papers <- subset(papers, degree > prune)
-  citations <- subset(citations, from %in% prune.papers & to %in% prune.papers)
   
   g <- igraph::graph.data.frame(citations, directed = T, vertices = papers)
   return(g)
