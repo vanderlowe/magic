@@ -8,7 +8,7 @@
 #' @param min.citations An integer to indicate how many times a paper has to be cited in order to be included in the graph (3 by default). Use 0 to plot the entire network as-is.
 magicOverview <- function(user = NULL, min.citations = 3) {
   g <- magicCitationNetwork(user = user)
-  if (simplify > 0) {
+  if (min.citations > 0) {
     citers <- V(delete.vertices(g, which(degree(g, mode = "out") < 1)))$name
     
     # Remove nodes with no edges
