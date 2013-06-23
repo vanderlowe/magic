@@ -11,7 +11,7 @@ magicCitationNetwork <- function(user = NULL) {
   }
   
   # Citations are edges in the network
-  citations <- magicSQL(sprintf("SELECT `from`, `to`, `section` FROM citations WHERE user IN ('%s')", paste(users, collapse = "','")), "cpw_litReview")
+  citations <- magicSQL(sprintf("SELECT `from`, `to`, `section` FROM citations WHERE user IN ('%s') AND `to` IS NOT NULL", paste(users, collapse = "','")), "cpw_litReview")
   
   # Papers are the network vertices
   papers <- magicSQL("SELECT `citekey`, COUNT(`to`) as degree

@@ -14,6 +14,9 @@
   the graph (3 by default). Use 0 to plot the entire
   network as-is.}
 }
+\value{
+  Nothing; plots a graph.
+}
 \description{
   This function queries the \code{cpw_litReview} to
   visualize a citation network between the papers in the
