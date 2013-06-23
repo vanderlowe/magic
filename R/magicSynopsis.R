@@ -6,6 +6,9 @@
 #' @param citekey The citation key of the paper to be summarized.
 #' @return A vector of sentences
 magicSynopsis <- function(citekey) {
+  
+  popular = c()
+  
   cites <- magicSQL(sprintf("SELECT `sentence`, `from` FROM `citations` WHERE `to` = '%s' ORDER BY `created`", tolower(citekey)), "cpw_litReview")
   if (length(cites$sentence) > 0) {
     for (citer in unique(cites$from)) {
