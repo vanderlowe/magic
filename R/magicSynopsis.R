@@ -29,7 +29,15 @@ magicSynopsis <- function(citekey) {
     cat(sprintf("Most frequently cited articles in %s:\n", citekey))
     for (i in 1:row.count) {
       cat(i, ") ", as.character(popular[i, "Reference"]), " (", as.character(popular[i, "times_cited"]), " times)\n", sep = "")
-    } 
+    }
+    cat("\n")
+  }
+  
+  hilites <- magicSQL(sprintf("SELECT DISTINCT(`sentence`) FROM `citations` WHERE `from` = '%s' and `to` IS NULL", tolower(citekey)), "cpw_litReview")$sentence
+  if (length(hilites) > 0) {
+    cat(sprintf("Highlighted sentences in %s:\n", citekey))
+    cat(paste(hilites, collapse = "\n"))
+    cat("\n")
   }
   
   # Calculate keywords
@@ -39,7 +47,7 @@ magicSynopsis <- function(citekey) {
   rownames(keywords) <- NULL
   
   # Drop years
-  keywords <- keywords[!str_detect(keywords$keyword, "\\d{4}"), ]
+  keywords <- keywords[!stringr::str_detect(keywords$keyword, "\\d{4}"), ]
   
   # Drop words that are too frequent in English to be good keywords  
   stopwords <- c("a", "an", "the", "of", "e", "g", "is", "et", "al", "have", "has", "that",
