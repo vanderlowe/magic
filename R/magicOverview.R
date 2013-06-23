@@ -12,7 +12,7 @@ magicOverview <- function(user = NULL, min.citations = 3) {
     citers <- V(delete.vertices(g, which(degree(g, mode = "out") < 1)))$name
     
     # Remove nodes with no edges
-    g <- delete.vertices(g, which(degree(g, mode = "in") < simplify & !V(g)$name %in% citers))
+    g <- delete.vertices(g, which(degree(g, mode = "in") < min.citations & !V(g)$name %in% citers))
   }
   
   magic:::prettyNetwork(g)
