@@ -57,17 +57,15 @@ magicCite <- function(from, to, sentence, section) {
   
   if (is.null(to)) {
     to <- "NULL"
-    hilite = 1
   } else {
     to <- paste("'", tolower(to), "'", sep = "", collapse = "")
-    hilite = 0
   }
   
   section <- tolower(section)
   
-  sql <- sprintf("INSERT INTO `citations` (`from`, `to`, `sentence`, `section`, `user`, `highlight`)
+  sql <- sprintf("INSERT INTO `citations` (`from`, `to`, `sentence`, `section`, `user`)
                   VALUES ('%s', %s, '%s', %s, '%s', %i)",
-                 from, to, sentence, section, Sys.getenv('magic_user'), hilite
+                 from, to, sentence, section, Sys.getenv('magic_user')
                  )
   magicSQL(sql, "cpw_litReview")
   return(TRUE)
