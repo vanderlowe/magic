@@ -4,8 +4,13 @@
 #' @export
 #' @import igraph
 #' @param user Optional vector of user names to filter citations based on who contributed them into the database.
-magicOverview <- function(user = NULL, prune = 1) {
-  g <- magicCitationNetwork(user = user, prune = prune)
+magicOverview <- function(user = NULL, simplify = TRUE) {
+  g <- magicCitationNetwork(user = user)
+  if (simplify) {
+    # Remove nodes with no edges
+    new_g <- delete.vertices(g, which(degree(g) < 1)-1)
+  }
+  
   prettyNetwork(g)
 }
 
