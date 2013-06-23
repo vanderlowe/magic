@@ -2,7 +2,7 @@
 \alias{magicCitationNetwork}
 \title{Get citation network}
 \usage{
-  magicCitationNetwork(user = NULL, prune = 0)
+  magicCitationNetwork(user = NULL)
 }
 \description{
   This function returns an \code{igraph} network object.
