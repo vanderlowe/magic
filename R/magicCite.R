@@ -24,8 +24,14 @@ magicCite <- function(from, to, sentence, section) {
     stop("Citekey of the source document cannot be blank.")
   }
   
-  if (to %in% c("", NA, character(0))) {
-    stop("Citekey of the target document cannot be blank.")
+  if (!is.null(to)) {
+    if (to %in% c("", NA, character(0))) {
+      stop("Citekey of the target document cannot be blank.")
+    }
+    
+    if (!magic:::citekeyExists(to, verbose = F)) {
+      magicPaper(to)  # Create target paper, if it does not already exist.
+    }
   }
   
   if (sentence %in% c("", NA, character(0))) {
@@ -38,10 +44,6 @@ magicCite <- function(from, to, sentence, section) {
     stop("You must create the source paper first. Use magicPaper().")
   }
   
-  if (!magic:::citekeyExists(to, verbose = F)) {
-    magicPaper(to)  # Create target paper, if it does not already exist.
-  }
-  
   if (missing(section)) {
     section <- "NULL"
   } else {
@@ -52,12 +54,20 @@ magicCite <- function(from, to, sentence, section) {
   }
   
   from <- tolower(from)
-  to <- tolower(to)
+  
+  if (is.null(to)) {
+    to <- "NULL"
+    hilite = 1
+  } else {
+    to <- paste("'", tolower(to), "'", sep = "", collapse = "")
+    hilite = 0
+  }
+  
   section <- tolower(section)
   
-  sql <- sprintf("INSERT INTO `citations` (`from`, `to`, `sentence`, `section`, `user`)
-                  VALUES ('%s', '%s', '%s', %s, '%s')",
-                 from, to, sentence, section, Sys.getenv('magic_user')
+  sql <- sprintf("INSERT INTO `citations` (`from`, `to`, `sentence`, `section`, `user`, `highlight`)
+                  VALUES ('%s', %s, '%s', %s, '%s', %i)",
+                 from, to, sentence, section, Sys.getenv('magic_user'), hilite
                  )
   magicSQL(sql, "cpw_litReview")
   return(TRUE)
