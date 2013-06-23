@@ -54,11 +54,18 @@ magicCite(from = myPDF,
 
 The `from` argument indicates the source document making the citation (`ekman1999` in our case, stored in the `myPDF` variable). The `to` argument is the target of the citation, `sentence` is the textual context in which the citation occurs, and the `section` indicates whether the citation occurs in the __i__ntroduction, __m__ethod, __r__esults, or __d__iscussion (as indicated by the first letter of the section heading).
 
-Thus, reading the entire paper, your script would include a long list of `magicCite` functions (see a [full example for `ekman1999`](https://github.com/vanderlowe/magic/blob/master/inst/examples/ekman1999.R)).
+Thus, reading the entire paper, your script would include a long list of `magicCite` functions (see a [full example for `ekman1999`](https://github.com/vanderlowe/magic/blob/master/inst/examples/ekman1999.R) and [`mauss2005`](https://github.com/vanderlowe/magic/blob/master/inst/examples/mauss2005.R)).
 
+Note: You can also use `magicCite` to highlight important sentences that do not necessarily include a citation. For example, here is how we can highlight a sentence in `ekman1999`:
+```
+magicCite("ekman1999", to = NULL, "To identify separate discrete emotions does not necessarily require that one also take an evolutionary view of emotions.")
+```
 # Making sense of the literature in the database
 
-After entering citations from just two papers, we can already gain valuable insight about citation trends to guide our literature review. The function `magicSynopsis` can be used to get a a brief summary of the paper. Let us start with learning about citation patterns in `ekman1999`. 
+After entering citations from just two papers, we can already gain valuable insight about citation trends to guide our literature review.
+
+## Examining individual papers with `magicSynopsis`
+The function `magicSynopsis` can be used to get a a brief summary of the paper. Let us start with learning about citation patterns in `ekman1999`. 
 ```
 magicSynopsis("ekman1999")
 ```
@@ -75,6 +82,9 @@ Most frequently cited articles in ekman1999:
 7) johnsonlaird1992 (2 times)
 8) levenson1990 (2 times)
 9) tooby1990 (2 times)
+
+Highlighted sentences in ekman1999:
+To identify separate discrete emotions does not necessarily require that one also take an evolutionary view of emotions.
 ```
 It appears that Ekman made a reference to a paper `ohman1986` four times, suggesting that it might be relevant to us, too. Let's take a look at this paper, then.
 ```
@@ -88,7 +98,7 @@ Ohman's (1986) analysis of fear is relevant to these complexities. He distinguis
 Most frequent citation words ohman1986:
 fear 
 ```
-Well, look at that! A rather nice summary of `ohman1984`, in the words of Dr. Paul Ekman himself. Seems like `ohman1984` is a paper about biological and social influences on the emotion of fear. Peeking into the PDF, we find out that the title of `Ohman1984` is _"Face the beast and fear the face: animal and social fears as prototypes for evolutionary analyses of emotion"_, which indeed matches the synopsis.
+Well, look at that! A rather nice summary of `ohman1984`, in the words of Dr. Paul Ekman himself. It seems like `ohman1984` is a paper about biological and social influences on the emotion of fear. Peeking into the PDF, we find out that the title of `Ohman1984` is _"Face the beast and fear the face: animal and social fears as prototypes for evolutionary analyses of emotion"_, which indeed matches the synopsis.
 
 (As a sidenote, the output for `ohman1986` is slightly different from what we saw before, because it was cited by `ekman1999` whereas `ekman1999` was not cited by `Mauss2005`, the only other paper in this example. Because `ekman1999` was a source, but not the target of citations, output for `magicSynopsis("ohman1984")` was different from `magicSynopsis("ekman1999")`. For papers that are both target and sources of citations, the output combines both types of information.)
 
@@ -103,11 +113,22 @@ For many theorists, a defining feature of emotion is response coherence (e.g., E
 Most frequent citation words lazarus1991:
 response, levenson, coherence, ekman, emotion, different, emotions 
 ```
-It seems that `Mauss2005` cited `lazarus1991` twice as many times as `ekman1999`. Because Dr. Mauss wrote in more length about `lazarus1991` than Dr. Ekman did, the summary is longer. Fortunately, this increased word count has made the final line of the output more useful. This paper appears to be about response coherence in different emotions and mentioned frequently with citations including Levenson and Ekman, who are well-respected emotion theorists. Sounds like `lazarus1991` might be an important paper to read. (Peeking into the PDFs, `lazarus1991` appears to be a book titled _Emotion and Adaptation_. Perhaps I should read the summaries in the output of `magicSynosis("lazarus1991")` to get a better idea of what to expect before reading the book itself.)
+It seems that `Mauss2005` cited `lazarus1991` twice as many times as `ekman1999`. Because Dr. Mauss wrote in more length about `lazarus1991` than Dr. Ekman did, the summary is longer. Fortunately, this increased word count has made the final line of the output more useful. This paper could be about response coherence in different emotions and mentioned frequently with citations including Levenson and Ekman, who are well-respected emotion theorists. Sounds like `lazarus1991` might be an important paper to read. (Peeking into the PDFs, `lazarus1991` appears to be a book titled _Emotion and Adaptation_. Perhaps this would be a good time to read the summaries included in the output of `magicSynosis("lazarus1991")` to get a better idea of what to expect before reading the book itself.)
 
+## Getting the big picture with `magicOverview`
+Instead of examining the literature one paper at a time, `magicOverview` provides a visualization of the citation patterns in the literature review data. Let's give it a try.
+```
+magicOverview()
+```
+<img src = "http://i.imgur.com/eaBFWqF.png" alt="magicOverview() output" style="width: 750px;"/>
+As a result, the function renders a network of citations. In this network, it is easy to identify central papers that receive many citations. For example, `darwin1872`, `levenson1983`, `lazarus1991`, `ekman1992`, `rosenberg1994`, `tooby1990`, and `tomkins1962` are all cited by both `ekman1999` and `mauss2005`.
 
+The color of the citation lines indicates the section from which the citation originates. For example, it is easy to see that papers by Gottman, Gross, Kettunen, and Levenson are cited by `mauss2005` for their methods (the color for method section is green). As evident in the abundance of blue lines, most citations are located in introduction sections. The citation color also indicates that `ekman1999` is a theory paper, because it has no other sections than introduction.
 
+By default, `magicOverview` hides papers that have been cited at least three times. We can adjust the minimum citation threshold to get an even clearer view of the literature to decide which papers we should include in our literature review.
 
-
-
-
+```
+magicOverview(min.citations=6)
+```
+<img src = "http://i.imgur.com/cUBAF5R.png" alt="magicOverview() output simplified" style="width: 750px;"/>
+From this simplified graph we can easily see that `levenson1994`, `lazarus1991` and `ekman1992` are cited multiple times by both `mauss2005` and `ekman1999`. Therefore, if the content of both `mauss2005` and `ekman1999` are of interest to us, we would likely benefit from checking these papers as well. Of course, when citations from any (or all) of these papers are added to the literature database, our understanding of the field gets improved, yielding more even more targeted suggestions.
