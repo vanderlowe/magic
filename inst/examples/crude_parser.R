@@ -14,7 +14,7 @@ x = sentDetect(txt, language = "en") ## sentDetect() is the function to use. It 
 # Remove hyphenation
 x2 <- gsub("-[ \\s\\n]+", "", x)
 
-citations <- x2[str_detect(x2, "\\([^\\)]+?\\d{4}?[^\\)]*?\\)")]
+citations <- x2[str_detect(x2, "\\d{4}")]
 
 function.template <- "magicCite(from = '%s', 
 to = '', 
