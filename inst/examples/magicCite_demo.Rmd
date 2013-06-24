@@ -4,11 +4,11 @@ Let us assume that you are interested in quickly getting a sense of which papers
 
 The `magic` package helps you to harvest citations from a small set of papers to get a systematic overview  of the literature and highlight relevant papers.
 
-# Creating entries in the literature review database
+# Creating literature review database
 The first step is to let `magic` know which paper you are currently reading by using the `magicPaper` function.
 
 ## Creating a new paper with `magicPaper`
-The only required argument for `magicPaper` is a __citation key__ (or citekey for short). Each paper in the literature review must be uniquely identified, so that we know which paper is which. The citekey will be in the format of first author's family name and publication year, similar to the APA style in-text citations. Since our first paper to be read is by Ekman, the citekey will be `ekman1999`. Notice that there are no spaces, hyphenation is removed, and special characters are replaced with their basic equivalents (i.e., ö = o).
+The only required argument for `magicPaper` is a __citation key__ (or citekey for short). Each paper in the literature review must be uniquely identified, so that we know which paper is which. The citekey will be in the format of first author's family name and publication year, similar to the APA style in-text citations. Since our first paper to be read is by Ekman (1999), the citekey will be `ekman1999`. Notice that there are no spaces, hyphenation, or special characters in the citekey. Non-English special characters need to be replaced with their English versions (i.e., ö = o).
 
 Thus, to create a new paper in the literature review database, you can simply type:
 ```
@@ -19,7 +19,7 @@ However, it would also be nice to include the paper title in the database entry,
 ```
 magicPaper("ekman1999", "Basic Emotions", update = TRUE)
 ```
-The `update = TRUE` argument indicates that you are not creating a new paper, just updating an existing one.
+The `update = TRUE` argument indicates that you are not creating a new paper, just updating an existing one. Of course, you could have typed `magicPaper("ekman1999", "Basic Emotions")` in the first place.
 
 Since we will be soon needing the citekey `ekman1999`, let's store it for easy use:
 ```
@@ -56,16 +56,19 @@ The `from` argument indicates the source document making the citation (`ekman199
 
 Thus, reading the entire paper, your script would include a long list of `magicCite` functions (see a [full example for `ekman1999`](https://github.com/vanderlowe/magic/blob/master/inst/examples/ekman1999.R) and [`mauss2005`](https://github.com/vanderlowe/magic/blob/master/inst/examples/mauss2005.R)).
 
-Note: You can also use `magicCite` to highlight important sentences that do not necessarily include a citation. For example, here is how we can highlight a sentence in `ekman1999`:
+Note: You can also use `magicCite` to highlight important sentences that do not necessarily include a citation. For example, here is how we can highlight a sentence in `ekman1999`. The crucial part is to set `to = NULL`. A citation without a target paper is interpreted as a sentence __you__ wish to cite in your own writing (i.e., a highlighted sentence).
 ```
-magicCite("ekman1999", to = NULL, "To identify separate discrete emotions does not necessarily require that one also take an evolutionary view of emotions.")
+magicCite("ekman1999", 
+          to = NULL, 
+          "To identify separate discrete emotions does not necessarily require that one also take an evolutionary view of emotions."
+)
 ```
 # Making sense of the literature in the database
 
-After entering citations from just two papers, we can already gain valuable insight about citation trends to guide our literature review.
+After entering citations from just two papers, we can already gain valuable insight about citation trends to guide the future direction of our literature review.
 
 ## Examining individual papers with `magicSynopsis`
-The function `magicSynopsis` can be used to get a a brief summary of the paper. Let us start with learning about citation patterns in `ekman1999`. 
+The function `magicSynopsis` can be used to get a a brief summary of a paper.
 ```
 magicSynopsis("ekman1999")
 ```
