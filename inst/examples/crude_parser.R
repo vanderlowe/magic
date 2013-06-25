@@ -14,8 +14,11 @@ x = sentDetect(txt, language = "en") ## sentDetect() is the function to use. It 
 # Remove hyphenation
 x2 <- gsub("-[ \\s\\n]+", "", x)
 
+# Collect sentences that are probably citations (i.e., have 4 consequtive digits)
 citations <- x2[str_detect(x2, "\\d{4}")]
 
+# Template for creating a magicCite command
+# NOTE: All citations are marked to originate from Introduction section
 function.template <- "magicCite(from = '%s', 
 to = '', 
 sentence = '%s', 
@@ -24,10 +27,13 @@ section = 'i'
 
 "
 
+# Create a placeholder for results
 output <- c()
 
+# Process each citation
 for (cite in citations) {
   output <- c(output, sprintf(function.template, citekey, cite))
 }
 
+# Write into file
 writeLines(output, paste(citekey, "R", sep = "."))
