@@ -59,9 +59,9 @@ magicPaper <- function(citekey, title, update = FALSE) {
 
 #' Function to check whether a paper is already in the database
 citekeyExists <- function(citekey, verbose = T) {
-  sql <- sprintf("SELECT citekey, title FROM papers WHERE citekey = '%s'", citekey)
-  results <- magicSQL(sql, "cpw_litReview")
-  if (nrow(results) > 0) {
+  sql <- sprintf("SELECT COUNT(citekey) FROM papers WHERE citekey = '%s'", citekey)
+  results <- magicSQL(sql, "cpw_litReview")[, 1]
+  if (results > 0) {
     if (verbose) {
       msg <- sprintf("A paper %s '%s' already exists.", results$citekey, results$title)
       message(msg)
