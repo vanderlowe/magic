@@ -64,7 +64,7 @@ magicCite <- function(from, to, sentence, section) {
   section <- tolower(section)
   
   sql <- sprintf("INSERT INTO `citations` (`from`, `to`, `sentence`, `section`, `user`)
-                  VALUES ('%s', %s, '%s', %s, '%s', %i)",
+                  VALUES ('%s', %s, '%s', %s, '%s')",
                  from, to, sentence, section, Sys.getenv('magic_user')
                  )
   magicSQL(sql, "cpw_litReview")
