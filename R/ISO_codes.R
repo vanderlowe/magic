@@ -33,7 +33,7 @@ getISOs <- function(iso.length) {
 #' @return Two-character ISO2 alpha country code
 #' @export
 #' 
-iso2  <- function(country) {
+iso2 <- function(country) {
   if (is.na(country) | is.null(country) | missing(country)) {
     stop("You must supply either a country name or numeric ISO code")
   }
@@ -45,11 +45,14 @@ iso2  <- function(country) {
 }
 
 verifyISO2 <- function(code) {
+  if (identical(code, character(0))) {
+    return(NA)
+  }
   code <- as.character(code)
-  sql <- sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha2 = '%s'", code)
-  hits <- magicSQL(sql, "cpw_meta")
-  if (nrow(hits) == 0) {
-    stop("Could not find country.")
+  sql <- sprintf("SELECT COUNT(ISOalpha2) FROM countries WHERE ISOalpha2 = '%s'", code)
+  hits <- magicSQL(sql, "cpw_meta")[, 1]
+  if (hits == 0) {
+    stop(sprintf("Could not find country %s.", code))
   } else {
     if (nrow(hits) > 1) {stop("The code returns multiple countries.")}
     return(hits$ISOalpha2)
@@ -64,7 +67,7 @@ getISO2byName <- function(country) {
 
 getISO2byISO3 <- function(iso3) {
   return(
-    magic:::verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1]))
+    magic:::verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")$ISOalpha2))
   )
 }
 
@@ -87,6 +90,9 @@ iso3  <- function(country) {
 }
 
 verifyISO3 <- function(code) {
+  if (identical(code, character(0))) {
+    return(NA)
+  }
   code <- as.character(code)
   sql <- sprintf("SELECT ISOalpha3 FROM countries WHERE ISOalpha3 = '%s'", code)
   hits <- magicSQL(sql, "cpw_meta")
