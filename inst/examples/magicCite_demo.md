@@ -34,21 +34,21 @@ _"In this chapter I consolidate my previous writings about basic emotions (Ekman
 Since this sentence actually makes three citations, we need to use the `magicCite` function three times, like this:
 ```
 magicCite(from = myPDF, 
-          to <- "Ekman1984",
-          sentence <- "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
-          section <- "i"
+          to = "Ekman1984",
+          sentence = "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
+          section = "i"
 )
 
 magicCite(from = myPDF, 
-          to <- "Ekman1992a",
-          sentence <- "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
-          section <- "i"
+          to = "Ekman1992a",
+          sentence = "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
+          section = "i"
 )
 
 magicCite(from = myPDF, 
-          to <- "Ekman1992b",
-          sentence <- "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
-          section <- "i"
+          to = "Ekman1992b",
+          sentence = "In this chapter I consolidate my previous writings about basic emotions (Ekman1984) and introduce a few changes in my thinking.",
+          section = "i"
 )
 ```
 
