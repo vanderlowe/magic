@@ -55,7 +55,7 @@ verifyISO2 <- function(code) {
     stop(sprintf("Could not find country %s.", code))
   } else {
     if (hits > 1) {stop("The code returns multiple countries.")}
-    return(hits$ISOalpha2)
+    return(toupper(code))
   }
 }
 
@@ -100,7 +100,7 @@ verifyISO3 <- function(code) {
     stop("Could not find country.")
   } else {
     if (hits > 1) {stop("The code returns multiple countries.")}
-    return(hits$ISOalpha3)
+    return(toupper(code))
   }
 }
 
