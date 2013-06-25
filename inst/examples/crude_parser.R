@@ -8,6 +8,9 @@ citekey <- "mauss2005"
 # Load plain text copied from PDF
 txt <- paste(readLines("~/Downloads/mauss2005.txt"), collapse = " ")
 
+# TODO: Split into sections
+# sections <- strsplit(txt, split="^(INTRODUCTION|(I|i)ntroduction)$")
+
 # Split into sentences
 x = sentDetect(txt, language = "en") ## sentDetect() is the function to use. It detects and seperates sentences in a text. The first argument is the string vector (or text) and the second argument is the language.
 
