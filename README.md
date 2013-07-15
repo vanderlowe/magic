@@ -12,6 +12,9 @@ The easiest way to get some `magic` on your computer, please type the following 
 ```
     install.packages("devtools")
     require("devtools")
+    
+    install.packages("igraph")
+    require("igraph")
 
     install_github("magic", "vanderlowe")
     require("magic")
