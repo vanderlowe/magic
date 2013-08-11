@@ -63,13 +63,14 @@ magicExplain.character <- function(variable.name = NULL, database = NULL) {
 #' @export
 print.magicMetaVariables <- function(x) {
   # Print detailed explanation for perfect hits (i.e., only one result)
+  
   if (nrow(x) == 1) {
-    message(sprintf("The variable '%s' is located in the '%s' table of '%s' database.", x$Name, x$Table, x$Database))
-    message(sprintf("It has been described as '%s'.", x$Description))
+    message(sprintf("The variable '%s' is located in the '%s' table of '%s' database.", x$name, x$table, x$database))
+    message(sprintf("It has been described as '%s'.", x$description))
     message("It can have the following values:")
     
     # Query values and labels associated with the variable
-    values <- magicSQL(sprintf("SELECT Code as Value, Label FROM cpw_meta.responseOptions WHERE ID = %i ORDER BY Value", x$ID), "cpw_meta")
+    values <- magicSQL(sprintf("SELECT Code as Value, Label FROM cpw_meta.responseOptions WHERE ID = %i ORDER BY Value", x$id), "cpw_meta")
     for (i in 1:nrow(values)) {
       row <- values[i,]
       message(sprintf("%s = %s", row$Value, row$Label))
