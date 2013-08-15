@@ -16,6 +16,11 @@ magicSQL <- function(query = NULL, db = NULL) {
   if (!is.null(query) & is.null(db)) {
     stop("Please select a database to execute the query. For a list of available databases, type 'magicSQL()'.")
   }
+  
+  if (is.null(query) & !is.null(db)) {
+    query = sprintf("SHOW TABLES FROM %s;", db)
+  }
+  
   if (is.null(query)) {query = "SHOW DATABASES;"}
   
   # Check whether magicConfig needs to be run
