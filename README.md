@@ -125,9 +125,6 @@ There are a number of helpful `magic` functions at your disposal, especially for
     
     # Get a list of country data
     countries()
-    
-    # Plot quick maps
-    magicMap(countries, "capital_longitude")
 ```
 
 # citing `magic`
