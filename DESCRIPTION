@@ -31,3 +31,4 @@ Collate:
     'magicOverview.R'
     'magicPaper.R'
     'magicSynopsis.R'
+    'magicExplainTable.R'
