@@ -6,9 +6,12 @@
 #' @param db The name of the database that contains the table of interest.
 #' @keywords manip
 #' @export
+#' @return A data frame of variable names and descriptions. Best assigned to an object and viewed in RStudio.
 #' @examples
 #' \dontrun{
 #' magicExplainTable(table = "consumer_survey", db = "cpw_OpenSource)
+#' vars <- magicExplainTable(table = "consumer_survey", db = "cpw_OpenSource)
+#' View(vars)
 #' }
 
 magicExplainTable <- function(table = NULL, db = NULL) {
