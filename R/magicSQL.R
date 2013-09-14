@@ -39,7 +39,9 @@ magicSQL <- function(query = NULL, db = NULL) {
   # and Windows users via RODBC
   if (Sys.info()[1] == "Darwin") {
     # Code for Mac users
-    require(RMySQL)
+    if (!require(RMySQL)) { # If RMySQL is not installed, install it.
+      install.packages("RMySQL")
+    }
     con <- dbConnect("MySQL", host = magic_host, user = magic_user, password = magic_password, dbname = db)
     results <- dbGetQuery(con, query)
     
@@ -53,7 +55,9 @@ magicSQL <- function(query = NULL, db = NULL) {
     
   } else {
     # PC code in here
-    require(RODBC)
+    if (!require(RODBC)) { # If RODBC is not installed, install it.
+      install.packages("RODBC")
+    }
     
     channel <- odbcConnect("UnifiedServer")
     
