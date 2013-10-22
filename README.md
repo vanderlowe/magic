@@ -28,8 +28,8 @@ Please go to http://dev.mysql.com/downloads/connector/odbc/#downloads and downlo
 4. Select `Add...` in this tab.
 5. Choose `MySQL ODBC 5.2w Driver`
 6. Fill in the following values on the new screen:
-7. In the "Data Source Name:" field, type: `UnifiedServer` (Leave the description field blank.)
-8. For the "TCP/IP Server field:", enter: `alex.e-psychometrics.com` (Leave the "Port:" as 3306)
+7. In the "Data Source Name:" field, type: `CPW Server` (Leave the description field blank.)
+8. For the "TCP/IP Server field:", enter: `koganserver001.psychol.cam.ac.uk` (Leave the "Port:" as 3306)
 9. For the "User:" Field, enter your Hermes user name. Your Hermes user name is the beginning of your Cambridge email address, such as `ak823`. 
 10. For the value of "Password", enter the password you received from Ilmo. (Leave the "Database:" field blank.)
 11. Click OK!

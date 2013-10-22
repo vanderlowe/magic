@@ -12,7 +12,7 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
   if (interactive()) {
     # R is running in interactive mode.
     # First, set host
-    Sys.setenv(magic_host = 'alex.e-psychometrics.com')
+    Sys.setenv(magic_host = 'koganserver001.psychol.cam.ac.uk')
         
     # If user name is provided as an argument, use it.
     if (!is.null(user)) {
@@ -38,7 +38,7 @@ magicConfig <- function(user = NULL, password = NULL, save.to.file = F) {
   if (save.to.file) {
     
     config.data <- c("message('Loading magic settings...')",
-                     "Sys.setenv(magic_host = 'alex.e-psychometrics.com')",
+                     "Sys.setenv(magic_host = 'koganserver001.psychol.cam.ac.uk')",
                      sprintf("Sys.setenv(magic_user = '%s')", Sys.getenv("magic_user")),
                      sprintf("Sys.setenv(magic_password = '%s')", Sys.getenv("magic_password")), "")
     

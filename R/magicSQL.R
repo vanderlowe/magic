@@ -34,10 +34,10 @@ magicSQL <- function(query = NULL, db = NULL) {
   magic_user <- Sys.getenv("magic_user")
   magic_password <- Sys.getenv("magic_password")
   
-  # Check whether the user is on a Windows or Mac system
-  # This is needed, because Mac users will connect via RMySQL
+  # Check whether the user is on a Windows or Mac/Linux system
+  # This is needed, because Mac/Linux users will connect via RMySQL
   # and Windows users via RODBC
-  if (Sys.info()[1] == "Darwin") {
+  if (Sys.info()[1] %in% c("Darwin","Linux")) {
     # Code for Mac users
     if (!require(RMySQL)) { # If RMySQL is not installed, install it.
       install.packages("RMySQL")
@@ -58,8 +58,8 @@ magicSQL <- function(query = NULL, db = NULL) {
     if (!require(RODBC)) { # If RODBC is not installed, install it.
       install.packages("RODBC")
     }
-    
-    channel <- odbcConnect("UnifiedServer")
+    # Now the official ODBC name of the new database (formerly UnifiedServer)
+    channel <- odbcConnect("CPW Server") 
     
     # Check whether db was defined; if yes, use the given database
     if (!is.null(db)) {
